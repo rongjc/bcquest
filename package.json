@@ -6,8 +6,11 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.36",
+    "@uifabric/styling": "^5.19.1",
     "history": "^4.7.2",
+    "material-ui": "^1.0.0-beta.37",
     "meteor-node-stubs": "^0.3.2",
+    "office-ui-fabric-react": "^5.64.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
