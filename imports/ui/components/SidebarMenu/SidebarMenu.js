@@ -13,7 +13,7 @@ const SidebarMenu = ({groups, expanded, collapsed}) => (
 SidebarMenu.defaultProps = {
   groups: [{
     links: [{
-      name: 'Crowdsale',
+      name: 'Item',
       url: '/crowdsale',
       links: [{
         name: 'New',
@@ -29,7 +29,10 @@ SidebarMenu.defaultProps = {
         icon: 'Accept',
       }],
       isExpanded: true,
-    }]
+    },{
+      name: 'Logout',
+      url: '/logout',
+      icon: 'Clear',}]
   }],
   expanded: 'expanded',
   collapsed: 'collapsed',
