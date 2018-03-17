@@ -11,10 +11,23 @@
     "material-ui": "^1.0.0-beta.37",
     "meteor-node-stubs": "^0.3.2",
     "mobx": "^4.1.0",
+    "mobx-react": "^5.0.0",
     "office-ui-fabric-react": "^5.64.3",
+    "query-string": "^6.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "store2": "^2.7.0",
+    "sweetalert2": "^7.15.1",
+    "web3": "^0.20.6"
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }

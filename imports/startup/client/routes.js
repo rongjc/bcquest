@@ -14,6 +14,8 @@ import LoginPage from '../../ui/pages/LoginPage.js'
 import LogoutPage from '../../ui/pages/LogoutPage.js'
 import CrowdSaleContractPage from '../../ui/pages/CrowdSaleContractPage.js'
 
+import CrowdsaleContractStep1 from '../../ui/components/CrowdsaleContractStep1/CrowdsaleContractStep1.js'
+
 const browserHistory = createBrowserHistory();
 
 export const renderRoutes = () => (
@@ -27,7 +29,10 @@ export const renderRoutes = () => (
 	      	<Route path="/features" component={NotFoundPage}/>
       	   	<Route path="/" >	    		
 	    		<MainContainer>
-	    			<Route path="/crowdsale/new" component={CrowdSaleContractPage}/>	    		
+	    			<Switch>
+	    			<Route path="/crowdsale/new" component={CrowdsaleContractStep1}/>
+	    			<Route path="/crowdsale/new/1" component={CrowdsaleContractStep1}/>
+	    			</Switch>
 	    		</MainContainer>
 	    	</Route>
 	    	</Switch>
