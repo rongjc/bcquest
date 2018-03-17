@@ -12,18 +12,25 @@ import TestPage from '../../ui/pages/TestPage.js';
 import SignupPage from '../../ui/pages/SignupPage.js'
 import LoginPage from '../../ui/pages/LoginPage.js'
 import LogoutPage from '../../ui/pages/LogoutPage.js'
+import CrowdSaleContractPage from '../../ui/pages/CrowdSaleContractPage.js'
 
 const browserHistory = createBrowserHistory();
 
 export const renderRoutes = () => (
-	<Router history={browserHistory}>
+	<Router history={browserHistory} >
 	    <AppContainer>	   
-	    	<Route exact={true} path="/" component={MainContainer} />
+	    	<Switch>	 
 			<Route path="/login" component={LoginPage}/>
 			<Route path="/logout" component={LogoutPage}/>
 			<Route path="/signup" component={SignupPage}/>	    	
 	      	<Route path="/test" component={TestPage}/>
 	      	<Route path="/features" component={NotFoundPage}/>
+      	   	<Route path="/" >	    		
+	    		<MainContainer>
+	    			<Route path="/crowdsale/new" component={CrowdSaleContractPage}/>	    		
+	    		</MainContainer>
+	    	</Route>
+	    	</Switch>
 	    </AppContainer>
 	</Router>
 );
