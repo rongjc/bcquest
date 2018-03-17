@@ -43,7 +43,7 @@ export default class AppContainer extends Component {
           <NavBar />
         </div>      
         <div className="body">  
-        {this.props.children}
+          {this.props.children}
         </div>
         <div className="footer ms-bgColor-themePrimary">
           <Footer />

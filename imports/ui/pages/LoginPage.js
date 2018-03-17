@@ -9,14 +9,21 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import { Accounts } from 'meteor/accounts-base';
 export const history = createBrowserHistory()
 
+// This handles the user login and user creation
 export default class LoginPage extends Component {
   constructor(props){
     super(props);
     this.state = {
       error: ''
     };
+    this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
+    if(Meteor.userId() !== null ){
+      this.props.history.push('/');
+    }
   }
 
+  // This handles the user login
   login(e){
     let email = document.getElementById('login-email').value;
     let password = document.getElementById('login-password').value;
@@ -26,11 +33,12 @@ export default class LoginPage extends Component {
           error: err.reason
         });
       } else {
-        history.push('/');
+        this.props.history.push('/');
       }
     });
   }
 
+  // This handles the user login
   signup(e){
     let email = document.getElementById('login-email').value;
     let password = document.getElementById('login-password').value;
@@ -40,7 +48,7 @@ export default class LoginPage extends Component {
           error: err.reason
         });
       } else {
-        history.push('/');
+        this.props.history.push('/');
       }
     });
 
@@ -62,7 +70,17 @@ export default class LoginPage extends Component {
               isBlocking: true,
               containerClassName: 'ms-dialogMainOverride'
             } }
-          >     
+          >  
+            <div>
+            { error.length > 0 ?
+                <MessageBar
+                  messageBarType={ MessageBarType.error }
+                  isMultiline={ false }
+                >
+                {this.state.error}
+                </MessageBar>
+              :''}              
+            </div>                
             <TextField label='Email ' id='login-email' required={ true } / >
             <TextField label='Password ' type='password' id='login-password' required={ true } / >
             <DialogFooter>

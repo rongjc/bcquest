@@ -1,9 +1,26 @@
-import { createContainer } from 'meteor/react-meteor-data';
-import MainPage from '../pages/MainPage.js'
+import React, { Component } from 'react';
+import SidebarMenu from '../components/SidebarMenu/SidebarMenu.js';
+import Content from '../components/Content/Content.js';
 
-export default MainContainer = createContainer(({params}) => {
-  const currentUser = Meteor.user();
-  return {
-    currentUser,
-  };
-}, MainPage);
+export default class MainContainer extends Component {
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    return (
+      <div className="main-container">
+
+      	<div className="sidebar">
+      		<SidebarMenu />
+      	</div>      
+        <div className="content">
+			<Content>
+			{this.props.children}            
+			</Content>
+      	</div>
+      </div>
+    );
+  }
+}
+

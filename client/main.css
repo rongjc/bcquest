@@ -23,15 +23,21 @@ body {
   flex: 1;
 }
 
-.body .sidebar {
-  order: -1;
-}
-
-.body .content {
+.App .body .main-container {
+  display: flex;
+  flex-direction: row;
   flex: 1;
 }
 
-.body .sidebar {
+.body .main-container .sidebar {
+  order: -1;
+}
+
+.body .main-container .content {
+  flex: 1;
+}
+
+.body .main-container .sidebar {
   max-width: 12em;
   flex: 0 0 12em;
 }

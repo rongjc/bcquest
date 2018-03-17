@@ -19,9 +19,7 @@ export default class LogoutPage extends Component {
   render(){
     
     return (
-      <div className="modal show">
-         test
-      </div>
+      <div />      
     );
   }
 }
