@@ -1,9 +1,11 @@
+import React, { Component } from 'react'
 import { observable, action } from 'mobx';
 import { CONTRACT_TYPES } from '../utils/constants';
 import autosave from './autosave'
 
-class ContractStore {
+class ContractStore{
 
+  @observable name;
   @observable token;
   @observable crowdsale;
   @observable pricingStrategy;
@@ -17,7 +19,6 @@ class ContractStore {
 
   constructor() {
     this.contractType = CONTRACT_TYPES.whitelistwithcap;
-
     autosave(this, 'ContractStore')
   }
 
@@ -36,4 +37,4 @@ class ContractStore {
   }
 }
 
-export default ContractStore;
+export default ContractStore

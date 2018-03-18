@@ -4,7 +4,7 @@ import Content from '../components/Content/Content.js';
 
 export default class MainContainer extends Component {
   constructor(props){
-    super(props);
+    super(props);    
   }
 
   render(){

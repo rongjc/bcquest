@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
+import { Provider } from 'mobx-react';
 
 // route components
 import AppContainer from '../../ui/containers/AppContainer.js';
@@ -15,11 +16,20 @@ import LogoutPage from '../../ui/pages/LogoutPage.js'
 import CrowdSaleContractPage from '../../ui/pages/CrowdSaleContractPage.js'
 
 import CrowdsaleContractStep1 from '../../ui/components/CrowdsaleContractStep1/CrowdsaleContractStep1.js'
+import ContractStore from '../../stores/ContractStore';
+import Web3Store from '../../stores/Web3Store';
+
 
 const browserHistory = createBrowserHistory();
+const contractStore = new ContractStore
+const web3Store = new Web3Store
 
 export const renderRoutes = () => (
-	<Router history={browserHistory} >
+	<Provider 
+		contractStore={contractStore}
+		web3Store={web3Store}
+	>
+	<Router history={browserHistory} >		
 	    <AppContainer>	   
 	    	<Switch>	 
 			<Route path="/login" component={LoginPage}/>
@@ -36,6 +46,8 @@ export const renderRoutes = () => (
 	    		</MainContainer>
 	    	</Route>
 	    	</Switch>
-	    </AppContainer>
+	    </AppContainer>	    
 	</Router>
+	</Provider>
+	
 );

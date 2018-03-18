@@ -2,7 +2,7 @@ import { incorrectNetworkAlert, noMetaMaskAlert, invalidNetworkIDAlert } from '.
 import { CHAINS, MAX_GAS_PRICE } from './constants'
 import { crowdsaleStore } from '../stores/CrowdsaleStore'
 import { generalStore } from '../stores/GeneralStore'
-import { web3Store } from '../stores/Web3Store'
+import { web3Store } from '../stores/Web3Store.js'
 
 import { fetchFile } from './utils'
 
@@ -11,19 +11,21 @@ const DEPLOY_CONTRACT = 1
 const CALL_METHOD = 2
 
 export function checkWeb3 () {
-  const { web3 } = web3Store
+  
+  console.log(this.web3Store);
 
-  if (!web3) {
-    setTimeout(function () {
-      web3Store.getWeb3(web3 => {
-        if (!web3) return noMetaMaskAlert()
-        checkMetaMask()
-      })
-    }, 500)
+  // const { web3 } = web3Store
+  // if (!web3) {
+  //   setTimeout(function () {
+  //     web3Store.getWeb3(web3 => {
+  //       if (!web3) return noMetaMaskAlert()
+  //       checkMetaMask()
+  //     })
+  //   }, 500)
 
-  } else {
-    checkMetaMask()
-  }
+  // } else {
+  //   checkMetaMask()
+  // }
 }
 
 const checkMetaMask = () => {

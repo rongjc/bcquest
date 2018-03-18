@@ -13,7 +13,6 @@ export function setFlatFileContentToState(file) {
 export function fetchFile(path) {
   return new Promise((resolve, reject) => {
     const rawFile = new XMLHttpRequest()
-
     rawFile.addEventListener('error', reject)
     rawFile.open('GET', path, true)
     rawFile.onreadystatechange = function () {

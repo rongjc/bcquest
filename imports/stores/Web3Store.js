@@ -1,20 +1,23 @@
 import Web3 from 'web3'
 import { observable } from 'mobx';
 
-class Web3Store {
+export default class Web3Store {
 
   @observable web3;
   @observable curAddress
   @observable accounts
 
-  constructor(strategies) {
+  constructor(strategies) {    
     this.getWeb3((web3) => {
       if (web3) {
         this.web3 = web3
-        web3.eth.getAccounts().then((accounts) => {
-          this.accounts = accounts
-          this.curAddress = accounts[0]
-        })
+        this.accounts = web3.eth.accounts
+        this.curAddress = web3.eth.accounts[0]        
+        // I can't seem to get the promise working
+        // web3.eth.getAccounts().then((accounts) => {
+        //   this.accounts = accounts
+        //   this.curAddress = accounts[0]
+        // })
       }
     })
   }
@@ -41,4 +44,3 @@ class Web3Store {
   }
 }
 
-export default Web3Store;

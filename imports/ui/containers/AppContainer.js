@@ -7,29 +7,28 @@ import Footer from '../components/Footer/Footer.js'
 import MainContainer from './MainContainer.js';
 import { withHistory } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory'
-
 export const history = createBrowserHistory()
 
 // App component - represents the whole app
 export default class AppContainer extends Component {
 
-  constructor(props){
+  constructor(props){    
     super(props);
     this.state = this.getMeteorData();
-    this.logout = this.logout.bind(this);
+    this.logout = this.logout.bind(this);    
   }
   getMeteorData(){
     return { isAuthenticated: Meteor.userId() !== null };
   }
   componentWillMount(){
     if (!this.state.isAuthenticated) {
-      history.push('/login');
+      this.props.history.push('/login');
     }
   }
 
   componentDidUpdate(prevProps, prevState){
     if (!this.state.isAuthenticated) {
-      history.push('/login');
+      this.props.history.push('/login');
     }
   }
   logout(e){

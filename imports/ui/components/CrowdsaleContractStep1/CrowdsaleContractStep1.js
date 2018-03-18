@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import { setFlatFileContentToState, toast } from '../../../utils/utils';
 import { NAVIGATION_STEPS, CONTRACT_TYPES, TOAST } from '../../../utils/constants';
 import { inject, observer } from 'mobx-react';
-const { CROWDSALE_CONTRACT } = NAVIGATION_STEPS;
+import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup';
+import { DefaultButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
+import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 
 const DOWNLOAD_STATUS = {
   PENDING: 'pending',
@@ -12,36 +15,23 @@ const DOWNLOAD_STATUS = {
   FAILURE: 'failure'
 }
 
-const ContinueButton = ({downloadStatus}) => {
-  const success = downloadStatus === DOWNLOAD_STATUS.SUCCESS
-
-  if (success) {
-    return (
-      <Link to="/2">
-        <span className="button button_fill">Continue</span>
-      </Link>
-    );
-  } else {
-    return (
-      <Link to="/2" onClick={e => e.preventDefault()}>
-        <span className="button button_disabled button_fill">Continue</span>
-      </Link>
-    );
-  }
-};
-
 @inject('contractStore', 'web3Store') @observer
 export default class CrowdsaleContractStep1 extends Component {
-
-  constructor() {
-    super()
+      
+  constructor(props) {    
+    super(props)    
 
     this.state = {
-      contractsDownloaded: DOWNLOAD_STATUS.PENDING
+      contractsDownloaded: DOWNLOAD_STATUS.PENDING,
+      contractType: this.props.contractStore.contractType
+
     }
+    this.addContractsToState = this.addContractsToState.bind(this);
+    this._next = this._next.bind(this);
   }
 
   getStandardCrowdsaleAssets() {
+    console.log(contractStore);
     return Promise.all([
       this.getCrowdsaleAsset("CrowdsaleStandard", "crowdsale"),
       this.getCrowdsaleAsset("CrowdsaleStandardToken", "token")
@@ -62,14 +52,13 @@ export default class CrowdsaleContractStep1 extends Component {
   }
 
   getCrowdsaleAsset(contractName, stateProp) {
-    const src = setFlatFileContentToState(`./contracts/${contractName}_flat.sol`)
-    const bin = setFlatFileContentToState(`./contracts/${contractName}_flat.bin`)
-    const abi = setFlatFileContentToState(`./contracts/${contractName}_flat.abi`)
+    const src = setFlatFileContentToState(`/contracts/${contractName}_flat.sol`)
+    const bin = setFlatFileContentToState(`/contracts/${contractName}_flat.bin`)
+    const abi = setFlatFileContentToState(`/contracts/${contractName}_flat.abi`)
 
     return Promise.all([src, bin, abi])
       .then(result => this.addContractsToState(...result, stateProp))
   }
-
   addContractsToState(src, bin, abi, contract) {
     this.props.contractStore.setContract(contract, {
       src,
@@ -77,15 +66,17 @@ export default class CrowdsaleContractStep1 extends Component {
       abi: JSON.parse(abi),
       addr: (contract==="crowdsale" || contract==="pricingStrategy" || contract==="finalizeAgent") ? [] : "",
       abiConstructor: (contract==="crowdsale" || contract==="pricingStrategy" || contract==="finalizeAgent") ? [] : ""
-    });
+    });    
   }
 
   contractTypeSelected(e) {
     this.props.contractStore.setContractType(e.currentTarget.id);
     this.getWhiteListWithCapCrowdsaleAssets();
   }
-
   componentDidMount() {
+    //console.log(this.props);
+
+    
     checkWeb3(this.props.web3Store.web3);
 
     let downloadContracts = null
@@ -100,7 +91,8 @@ export default class CrowdsaleContractStep1 extends Component {
       default:
         break
     }
-
+    
+    downloadContracts = this.getWhiteListWithCapCrowdsaleAssets();    
     downloadContracts
       .then(
         () => {
@@ -109,38 +101,65 @@ export default class CrowdsaleContractStep1 extends Component {
           })
         },
         (e) => {
-          console.error('Error downloading contracts', e)
-          toast.showToaster({
-            type: TOAST.TYPE.ERROR,
-            message: 'The contracts could not be downloaded.Please try to refresh the page. If the problem persists, try again later.'
-          })
+          console.error('Error downloading contracts', e)          
           this.setState({
             contractsDownloaded: DOWNLOAD_STATUS.FAILURE
           })
         }
-      )
+    )
+  }
+  _next(){
+    this.props.contractStore.name = 
+    console.log(this.props.contractStore);
+    //this.props.history.push('/2');
+  }
+  
+  @autobind
+  _onChange(ev: React.FormEvent<HTMLInputElement>, option: any) {
+    console.dir(option);
   }
 
   render() {
+    const options = {
+
+    }
     return (
-       <section className="steps steps_crowdsale-contract">       
-        <div className="steps-content container">
-          <div className="radios">
-            <label className="radio">
-              <input
-                type="radio"
-                name="contract-type"
-                id={CONTRACT_TYPES.whitelistwithcap}
-                onChange={(e) => this.contractTypeSelected(e)}
-              />
-              <span className="title">Whitelist with Cap</span>
-              <span className="description">
-                Modern crowdsale strategy with multiple tiers, whitelists, and limits. Recommended for every crowdsale.
-              </span>
-            </label>
+       <div>    
+          <div>   
+            <TextField
+            label='Name '
+            errorMessage=''/>    
           </div>
-        </div>        
-      </section>
+          <div>   
+            <ChoiceGroup
+              defaultSelectedKey= {this.props.contractStore.contractType}
+              options={ [
+                {
+                  key: CONTRACT_TYPES.whitelistwithcap,
+                  text: CONTRACT_TYPES.whitelistwithcap
+                },
+                {
+                  key: "Test",
+                  text: "TEST, don't select"
+                }
+              ] }
+              onChange={ this._onChange }
+              label='Pick your crowdsale contract'
+              required={ true }
+            />    
+          </div>
+          <div>
+            <DefaultButton              
+              primary={ true }
+              disabled = {this.state.contractsDownloaded != DOWNLOAD_STATUS.SUCCESS}
+              text='Next'
+              onClick={ this._next }
+            />
+          </div>
+          <div>
+            
+          </div>
+      </div>
     )
   }
 }
