@@ -12,7 +12,7 @@ const CALL_METHOD = 2
 
 export function checkWeb3 () {
   
-  console.log(this.web3Store);
+  console.log(web3Store);
 
   // const { web3 } = web3Store
   // if (!web3) {
