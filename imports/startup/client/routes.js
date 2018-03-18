@@ -14,29 +14,21 @@ import SignupPage from '../../ui/pages/SignupPage.js'
 import LoginPage from '../../ui/pages/LoginPage.js'
 import LogoutPage from '../../ui/pages/LogoutPage.js'
 import CrowdSaleContractPage from '../../ui/pages/CrowdSaleContractPage.js'
-<<<<<<< HEAD
 
 import CrowdsaleContractStep1 from '../../ui/components/CrowdsaleContractStep1/CrowdsaleContractStep1.js'
 import ContractStore from '../../stores/ContractStore';
 import Web3Store from '../../stores/Web3Store';
-
-=======
->>>>>>> c836d8e339f81873babe2e2ca3a9218d3d6a728c
 
 const browserHistory = createBrowserHistory();
 const contractStore = new ContractStore
 const web3Store = new Web3Store
 
 export const renderRoutes = () => (
-<<<<<<< HEAD
 	<Provider 
 		contractStore={contractStore}
 		web3Store={web3Store}
 	>
 	<Router history={browserHistory} >		
-=======
-	<Router history={browserHistory} >
->>>>>>> c836d8e339f81873babe2e2ca3a9218d3d6a728c
 	    <AppContainer>	   
 	    	<Switch>	 
 			<Route path="/login" component={LoginPage}/>
@@ -46,7 +38,6 @@ export const renderRoutes = () => (
 	      	<Route path="/features" component={NotFoundPage}/>
       	   	<Route path="/" >	    		
 	    		<MainContainer>
-<<<<<<< HEAD
 	    			<Switch>
 	    			<Route path="/crowdsale/new" component={CrowdsaleContractStep1}/>
 	    			<Route path="/crowdsale/new/1" component={CrowdsaleContractStep1}/>
@@ -55,13 +46,6 @@ export const renderRoutes = () => (
 	    	</Route>
 	    	</Switch>
 	    </AppContainer>	    
-=======
-	    			<Route path="/crowdsale/new" component={CrowdSaleContractPage}/>	    		
-	    		</MainContainer>
-	    	</Route>
-	    	</Switch>
-	    </AppContainer>
->>>>>>> c836d8e339f81873babe2e2ca3a9218d3d6a728c
 	</Router>
 	</Provider>
 	
