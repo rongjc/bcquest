@@ -7,6 +7,7 @@ import Footer from '../components/Footer/Footer.js'
 import MainContainer from './MainContainer.js';
 import { withHistory } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory'
+import { inject, observer } from 'mobx-react';
 export const history = createBrowserHistory()
 
 // App component - represents the whole app
@@ -16,19 +17,20 @@ export default class AppContainer extends Component {
     super(props);
     this.state = this.getMeteorData();
     this.logout = this.logout.bind(this);    
+
   }
   getMeteorData(){
     return { isAuthenticated: Meteor.userId() !== null };
   }
-  componentWillMount(){
+  componentWillMount(){    
     if (!this.state.isAuthenticated) {
-      this.props.history.push('/login');
+      history.push('/login');
     }
   }
 
   componentDidUpdate(prevProps, prevState){
     if (!this.state.isAuthenticated) {
-      this.props.history.push('/login');
+      history.push('/login');
     }
   }
   logout(e){

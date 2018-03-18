@@ -19,6 +19,7 @@ class ContractStore{
 
   constructor() {
     this.contractType = CONTRACT_TYPES.whitelistwithcap;
+    console.log(this);
     autosave(this, 'ContractStore')
   }
 

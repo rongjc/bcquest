@@ -1,6 +1,6 @@
 import { TOAST } from './constants'
 import queryString from 'query-string'
-import { CrowdsaleConfig } from './Common/config'
+import { CrowdsaleConfig } from '../ui/Common/config'
 
 export function getQueryVariable(variable) {
   return queryString.parse(window.location.search)[variable]
