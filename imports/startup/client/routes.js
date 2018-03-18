@@ -17,12 +17,19 @@ import CrowdSaleContractPage from '../../ui/pages/CrowdSaleContractPage.js'
 
 import CrowdsaleContractStep1 from '../../ui/components/CrowdsaleContractStep1/CrowdsaleContractStep1.js'
 import CrowdsaleContractStep2 from '../../ui/components/CrowdsaleContractStep2/CrowdsaleContractStep2.js'
+import CrowdsaleContractStep3 from '../../ui/components/CrowdsaleContractStep3/CrowdsaleContractStep3.js'
 import ContractStore from '../../stores/ContractStore';
 import Web3Store from '../../stores/Web3Store';
 import TokenStore from '../../stores/TokenStore';
 import TierStore from '../../stores/TierStore';
 import ReservedTokenStore from '../../stores/ReservedTokenStore';
 import TierCrowdsaleListStore from '../../stores/TierCrowdsaleListStore';
+import DeploymentStore from '../../stores/DeploymentStore';
+import GeneralStore from '../../stores/GeneralStore';
+import GasPriceStore from '../../stores/GasPriceStore';
+import CrowdsaleStore from '../../stores/CrowdsaleStore';
+
+
 
 const browserHistory = createBrowserHistory();
 const contractStore = new ContractStore
@@ -31,6 +38,12 @@ const tokenStore = new TokenStore
 const tierStore = new TierStore
 const reservedTokenStore = new ReservedTokenStore
 const tierCrowdsaleListStore = new TierCrowdsaleListStore
+const deploymentStore = new DeploymentStore
+const generalStore = new GeneralStore
+const gasPriceStore = new GasPriceStore
+const crowdsaleStore = new CrowdsaleStore
+
+
 
 export const renderRoutes = () => (
 	<Provider 
@@ -40,6 +53,10 @@ export const renderRoutes = () => (
 		tierStore={tierStore}
 		reservedTokenStore={reservedTokenStore}
 		tierCrowdsaleListStore={tierCrowdsaleListStore}
+		deploymentStore={deploymentStore}
+		generalStore={generalStore}
+		gasPriceStore={gasPriceStore}
+		crowdsaleStore={crowdsaleStore}		
 	>
 	<Router history={browserHistory} >		
 	    <AppContainer>	   
@@ -54,6 +71,8 @@ export const renderRoutes = () => (
 	    			<Switch>	    			
 	    			<Route path="/crowdsale/new/1" component={CrowdsaleContractStep1}/>
 	    			<Route path="/crowdsale/new/2" component={CrowdsaleContractStep2}/>
+	    			<Route path="/crowdsale/new/3" component={CrowdsaleContractStep3}/>
+	    			<Route path="/crowdsale/new/4" component={CrowdsaleContractStep3}/>
 	    			</Switch>
 	    		</MainContainer>
 	    	</Route>
