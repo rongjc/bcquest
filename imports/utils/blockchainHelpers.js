@@ -2,39 +2,33 @@ import { incorrectNetworkAlert, noMetaMaskAlert, invalidNetworkIDAlert } from '.
 import { CHAINS, MAX_GAS_PRICE } from './constants'
 import { crowdsaleStore } from '../stores/CrowdsaleStore'
 import { generalStore } from '../stores/GeneralStore'
-import { web3Store } from '../stores/Web3Store.js'
+import Web3Store from '../stores/Web3Store'
 
 import { fetchFile } from './utils'
 
 
 const DEPLOY_CONTRACT = 1
 const CALL_METHOD = 2
+const web3Store = new Web3Store
+const web3 = web3Store.web3
 
-export function checkWeb3 () {
-  
-  console.log(web3Store);
+export function checkWeb3 () { 
 
-  // const { web3 } = web3Store
-  // if (!web3) {
-  //   setTimeout(function () {
-  //     web3Store.getWeb3(web3 => {
-  //       if (!web3) return noMetaMaskAlert()
-  //       checkMetaMask()
-  //     })
-  //   }, 500)
+  if (!web3) {
+    setTimeout(function () {
+      web3Store.getWeb3(web3 => {
+        if (!web3) return noMetaMaskAlert()
+        checkMetaMask()
+      })
+    }, 500)
 
-  // } else {
-  //   checkMetaMask()
-  // }
+  } else {
+    checkMetaMask()
+  }
 }
 
 const checkMetaMask = () => {
-  const { web3 } = web3Store
-
-  web3.eth.getAccounts()
-    .then(accounts => {
-      if (accounts.length === 0) return noMetaMaskAlert()
-    })
+  if(web3.eth.accounts.length === 0) return noMetaMaskAlert()    
 }
 
 export function checkNetWorkByID (_networkIdFromGET) {

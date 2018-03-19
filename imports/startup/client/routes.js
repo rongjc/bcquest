@@ -68,7 +68,7 @@ export const renderRoutes = () => (
 			<Route path="/signup" component={SignupPage}/>	    	
 	      	<Route path="/test" component={TestPage}/>
 	      	<Route path="/features" component={NotFoundPage}/>
-      	   	<Route path="/" >	    		
+      	   	<Route path="/" >
 	    		<MainContainer>
 	    			<Switch>	    			
 	    			<Route path="/crowdsale/new/1" component={CrowdsaleContractStep1}/>

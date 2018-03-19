@@ -12,6 +12,7 @@ class CrowdsaleBlockListStore {
   }
 
   @action addCrowdsaleItem = (crowdsaleBlock) => {
+    // todo: this is giving warnings and the remove part is not working properly
     this.blockList.push(crowdsaleBlock)
   }
 

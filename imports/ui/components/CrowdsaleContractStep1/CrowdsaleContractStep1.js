@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { checkWeb3 } from '../../../utils/blockchainHelpers'
 import { Link } from 'react-router-dom';
-import { setFlatFileContentToState, toast } from '../../../utils/utils';
+import { setFlatFileContentToState } from '../../../utils/utils';
 import { NAVIGATION_STEPS, CONTRACT_TYPES, TOAST } from '../../../utils/constants';
 import { inject, observer } from 'mobx-react';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
@@ -89,8 +89,7 @@ export default class CrowdsaleContractStep1 extends Component {
     this.getWhiteListWithCapCrowdsaleAssets();
   }
   componentDidMount() {
-    checkWeb3(this.props.web3Store.web3);
-
+    checkWeb3();
     let downloadContracts = null
 
     switch (this.props.contractStore.contractType) {

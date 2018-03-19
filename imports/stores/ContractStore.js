@@ -18,8 +18,7 @@ class ContractStore{
   @observable contractType;
 
   constructor() {
-    this.contractType = CONTRACT_TYPES.whitelistwithcap;
-    console.log(this);
+    this.contractType = CONTRACT_TYPES.whitelistwithcap;    
     autosave(this, 'ContractStore')
   }
 

@@ -37,7 +37,7 @@ export default class CrowdsaleContractStep2 extends Component {
   }
 
   componentDidMount() {
-    checkWeb3(this.props.web3Store.web3);
+    checkWeb3(this.props.web3Store);
   }
 
   showErrorMessages = (parent) => {

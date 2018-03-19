@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const Loader = ({show}) => {
-  return <div className={show?"loading-container":"loading-container notdisplayed"}>
+  return <div className={show=="true"?"loading-container":"loading-container notdisplayed"}>
     <div className="loading">
     </div>
     <div className="loading-text-container">

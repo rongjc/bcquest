@@ -4,15 +4,15 @@ import { observable } from 'mobx';
 export default class Web3Store {
 
   @observable web3;
-  @observable curAddress
-  @observable accounts
+  @observable curAddress;
+  @observable accounts;
 
   constructor(strategies) {    
     this.getWeb3((web3) => {
       if (web3) {
         this.web3 = web3
         this.accounts = web3.eth.accounts
-        this.curAddress = web3.eth.accounts[0]        
+        this.curAddress = web3.eth.accounts[0]            
         // I can't seem to get the promise working
         // web3.eth.getAccounts().then((accounts) => {
         //   this.accounts = accounts
@@ -36,8 +36,7 @@ export default class Web3Store {
     } else {
       // window.web3 == web3 most of the time. Don't override the provided,
       // web3, just wrap it in your Web3.
-      var myWeb3 = new Web3(web3.currentProvider);
-
+      var myWeb3 = new Web3(web3.currentProvider);      
       cb(myWeb3, false);
     }
     return myWeb3;
