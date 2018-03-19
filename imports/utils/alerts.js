@@ -221,3 +221,11 @@ export function whitelistImported(count) {
     type: 'info'
   })
 }
+
+export function invalidToken() {
+  return sweetAlert2({
+    title: 'Invalid Token',
+    html: `Token not valid`,
+    type: 'info'
+  })
+}

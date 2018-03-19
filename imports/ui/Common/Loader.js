@@ -1,20 +1,19 @@
 import React from 'react'
+import { Dialog, DialogType} from 'office-ui-fabric-react/lib/Dialog';
 
 export const Loader = ({show}) => {
-  return <div className={show=="true"?"loading-container":"loading-container notdisplayed"}>
-    <div className="loading">
-    </div>
-    <div className="loading-text-container">
-      <div className="loading-text">Do not refresh the webpage</div>
-    </div>
-    <div className="loading-progress">
-      <div className="loading-i"></div>
-      <div className="loading-i"></div>
-      <div className="loading-i"></div>
-      <div className="loading-i"></div>
-      <div className="loading-i"></div>
-      <div className="loading-i"></div>
-    </div>
-  </div>
+  return <div>
+            <Dialog
+            hidden={ !show }          
+            dialogContentProps={ {
+              type: DialogType.normal,              
+              subText: 'loading......'
+            } }
+            modalProps={ {
+              isBlocking: true,
+              containerClassName: 'ms-dialogMainOverride'
+            } }
+          />  
+        </div>
 }
 

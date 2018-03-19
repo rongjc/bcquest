@@ -7,7 +7,7 @@ import { InputField } from "../../Common/InputField";
 import { RadioInputField } from "../../Common/RadioInputField";
 import { CrowdsaleBlock } from "./CrowdsaleBlock";
 import { WhitelistInputBlock } from "../../Common/WhitelistInputBlock";
-import { Dialog, DialogType} from 'office-ui-fabric-react/lib/Dialog';
+import invalidToken from '../../../utils/alerts'
 
 import {
   NAVIGATION_STEPS,
@@ -73,7 +73,7 @@ export default class CrowdSaleStep3 extends Component {
   }
 
   showErrorMessages = parent => {
-    this.props.tierStore.invalidateToken();
+    this.props.tierStore.invalidateToken();    
   };
 
   addCrowdsale() {
@@ -109,7 +109,7 @@ export default class CrowdSaleStep3 extends Component {
   };
 
   goToDeploymentStage = () => {
-    this.props.history.push('/4')
+    this.props.history.push('/crowdsale/new/4')
   }
 
   addCrowdsaleBlock(num) {
@@ -124,7 +124,7 @@ export default class CrowdSaleStep3 extends Component {
           Add Tier
         </div>
         <Link
-          to={{ pathname: "/4", query: { state: this.state, changeState: this.changeState } }}
+          to={{ pathname: "/crowdsale/4", query: { state: this.state, changeState: this.changeState } }}
           onClick={e => this.beforeNavigate(e)}
           className="button button_fill"
         >
@@ -137,7 +137,8 @@ export default class CrowdSaleStep3 extends Component {
   beforeNavigate = e => {
     e.preventDefault();
     e.stopPropagation();
-
+    
+    this.setState({ loading: true })
     const { tierStore, gasPriceStore } = this.props;
     const gasPriceIsValid = gasPriceStore.custom.id !== this.state.gasPriceSelected || this.state.validation.gasPrice.valid === VALID
     const isMinCapValid = tierStore.globalMinCap <= tierStore.maxSupply
@@ -146,7 +147,7 @@ export default class CrowdSaleStep3 extends Component {
       tierStore.validateTiers("endTime", index);
       tierStore.validateTiers("startTime", index);
     }
-
+    
     if (!isMinCapValid) {
       this.setState(update(this.state, {
         validation: {
@@ -182,24 +183,26 @@ export default class CrowdSaleStep3 extends Component {
 
             return warningOnMainnetAlert(tiersCount, priceSelected, reservedCount, whitelistCount, this.goToDeploymentStage)
           }
+
           this.goToDeploymentStage()
+          this.setState({ loading: false })
         })
-        .catch(error => {
-          console.error(error)
+        .catch(error => {          
           this.showErrorMessages(e)
+          this.setState({ loading: false })
         })
     } else {
-      this.showErrorMessages(e);
+      this.showErrorMessages(e)
+      this.setState({ loading: false })
     }
   };
 
-  componentDidMount() {
+  componentDidMount() {    
     const { tierStore, web3Store, gasPriceStore } = this.props;
     const { curAddress } = web3Store;
     tierStore.setTierProperty(curAddress, "walletAddress", 0);
     tierStore.setTierProperty(defaultCompanyStartDate(), "startTime", 0);
-    tierStore.setTierProperty(defaultCompanyEndDate(tierStore.tiers[0].startTime), "endTime", 0);
-
+    tierStore.setTierProperty(defaultCompanyEndDate(tierStore.tiers[0].startTime), "endTime", 0);    
     gasPriceStore.updateValues()
       .then(() => this.setGasPrice(gasPriceStore.slow))
       .catch(() => noGasPriceAvailable())
@@ -212,6 +215,7 @@ export default class CrowdSaleStep3 extends Component {
     })    
     // Don't modify the price when choosing custom
     if (id !== this.props.gasPriceStore.custom.id) {
+      console.log(this.props.generalStore);
       this.props.generalStore.setGasPrice(price)
     }
   }
@@ -471,19 +475,9 @@ export default class CrowdSaleStep3 extends Component {
 
           {/* Other tiers */}
           <div>{crowdsaleBlockListStore.blockList}</div>
-
+          <Loader show={this.state.loading} />
           <div className="button-container">{this.renderLink()}</div>          
-            <Dialog
-            hidden={ !this.state.loading }          
-            dialogContentProps={ {
-              type: DialogType.normal,              
-              subText: 'loading......'
-            } }
-            modalProps={ {
-              isBlocking: true,
-              containerClassName: 'ms-dialogMainOverride'
-            } }
-          />          
+        
         </section>
       );
     }

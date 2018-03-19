@@ -20,4 +20,4 @@ class GeneralStore {
   }
 }
 
-export default GeneralStore;
+export default GeneralStore

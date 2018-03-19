@@ -7,12 +7,7 @@ class CrowdsaleStore {
   @observable maximumSellableTokensInWei
   @observable supply
   @observable selected
-
-  constructor () {
-    this.reset()
-    autosave(this, 'CrowdsaleStore')
-  }
-
+  
   @action reset = () => {
     this.crowdsales = []
     this.selected = {
@@ -20,6 +15,13 @@ class CrowdsaleStore {
       initialTiersValues: []
     }
   }
+
+  constructor () {
+    this.reset()
+    autosave(this, 'CrowdsaleStore')
+  }
+
+
 
   @action setCrowdsales = (crowdsales) => {
     this.crowdsales = crowdsales

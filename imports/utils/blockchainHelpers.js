@@ -2,14 +2,14 @@ import { incorrectNetworkAlert, noMetaMaskAlert, invalidNetworkIDAlert } from '.
 import { CHAINS, MAX_GAS_PRICE } from './constants'
 import { crowdsaleStore } from '../stores/CrowdsaleStore'
 import { generalStore } from '../stores/GeneralStore'
-import Web3Store from '../stores/Web3Store'
+import {web3Store} from '../stores/'
 
 import { fetchFile } from './utils'
 
 
 const DEPLOY_CONTRACT = 1
 const CALL_METHOD = 2
-const web3Store = new Web3Store
+
 const web3 = web3Store.web3
 
 export function checkWeb3 () { 
