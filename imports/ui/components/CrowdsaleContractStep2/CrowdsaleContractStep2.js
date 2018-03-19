@@ -90,7 +90,7 @@ export default class CrowdsaleContractStep2 extends Component {
   }
 
   renderLink () {
-    return <Link className="button button_fill" to='crowdsale/new/3'>Continue</Link>
+    return <Link className="button button_fill" to='/crowdsale/new/3'>Continue</Link>
   }
 
   renderLinkComponent = () => {

@@ -42,11 +42,11 @@ export default class CrowdSaleStep3 extends Component {
   constructor(props) {
     super(props);
     const { contractStore, crowdsaleBlockListStore, tierStore, gasPriceStore } = props;
-    window.scrollTo(0, 0);
-    if (contractStore.crowdsale.addr.length > 0) {
-      contractStore.setContractProperty("pricingStrategy", "addr", []);
-      setExistingContractParams(contractStore.abi, contractStore.addr[0], contractStore.setContractProperty);
-    }
+    window.scrollTo(0, 0);    
+    // if (contractStore.crowdsale.addr.length > 0) {
+    //   contractStore.setContractProperty("pricingStrategy", "addr", []);
+    //   setExistingContractParams(contractStore.abi, contractStore.addr[0], contractStore.setContractProperty);
+    // }
     crowdsaleBlockListStore.emptyList();
     tierStore.setTierProperty("Tier 1", "tier", 0);
     tierStore.setTierProperty("off", "updatable", 0);

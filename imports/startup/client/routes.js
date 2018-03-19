@@ -28,8 +28,8 @@ import DeploymentStore from '../../stores/DeploymentStore';
 import GeneralStore from '../../stores/GeneralStore';
 import GasPriceStore from '../../stores/GasPriceStore';
 import CrowdsaleStore from '../../stores/CrowdsaleStore';
-
-
+import CrowdsaleBlockListStore from '../../stores/CrowdsaleBlockListStore';
+import PricingStrategyStore from '../../stores/PricingStrategyStore';
 
 const browserHistory = createBrowserHistory();
 const contractStore = new ContractStore
@@ -42,8 +42,8 @@ const deploymentStore = new DeploymentStore
 const generalStore = new GeneralStore
 const gasPriceStore = new GasPriceStore
 const crowdsaleStore = new CrowdsaleStore
-
-
+const crowdsaleBlockListStore = new CrowdsaleBlockListStore
+const pricingStrategyStore = new PricingStrategyStore
 
 export const renderRoutes = () => (
 	<Provider 
@@ -57,6 +57,8 @@ export const renderRoutes = () => (
 		generalStore={generalStore}
 		gasPriceStore={gasPriceStore}
 		crowdsaleStore={crowdsaleStore}		
+		crowdsaleBlockListStore = {crowdsaleBlockListStore}
+		pricingStrategyStore = {pricingStrategyStore}
 	>
 	<Router history={browserHistory} >		
 	    <AppContainer>	   
