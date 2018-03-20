@@ -47,8 +47,7 @@ class DeploymentStore {
       }
       this.txMap.set(tx.name, [])
     })    
-    console.log(this.txMap._data.values().every(e=>console.log(e)));
-    this.logTxMap()
+        this.logTxMap()
   }
 
   @action initializePersonalized = (hasReservedToken, hasWhitelist, tiersCount, listOfTx) => {
@@ -93,9 +92,13 @@ class DeploymentStore {
   }
 
   @computed
-  get deploymentHasFinished () {
-    console.log(this.txMap.values());
-    return this.txMap._data.values().every(statuses => statuses.every(status => status))
+  get deploymentHasFinished () {    
+    this.txMap.forEach((value, key, map) => {
+      if(value == false) {
+        return false
+      }
+    })
+    return true
   }
 
   @computed

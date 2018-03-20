@@ -345,7 +345,7 @@ export default class CrowdSaleStep3 extends Component {
             side="left"
             type="text"
             title={WALLET_ADDRESS}
-            value={tierStore.tiers[0].walletAddress}
+            value={tierStore.tiers[0].walletAddress || ""}
             valid={tierStore.validTiers[0] && tierStore.validTiers[0].walletAddress}
             errorMessage={VALIDATION_MESSAGES.WALLET_ADDRESS}
             onChange={e => this.updateTierStore(e, "walletAddress", 0)}
