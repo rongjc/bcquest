@@ -229,3 +229,11 @@ export function invalidToken() {
     type: 'info'
   })
 }
+
+export function SaveAlert() {
+  return sweetAlert2({
+    title: 'The contract will be saved',
+    html: `The contract will be saved(not implemented yet`,
+    type: 'info'
+  })
+}

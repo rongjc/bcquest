@@ -14,6 +14,7 @@ const web3 = web3Store.web3
 
 export function checkWeb3 () { 
 
+console.log(web3Store)
   if (!web3) {
     setTimeout(function () {
       web3Store.getWeb3(web3 => {
@@ -28,7 +29,8 @@ export function checkWeb3 () {
 }
 
 const checkMetaMask = () => {
-  if(web3.eth.accounts.length === 0) return noMetaMaskAlert()    
+  console.log(web3)
+  if(web3.eth.getAccounts.length === 0) return noMetaMaskAlert()    
 }
 
 export function checkNetWorkByID (_networkIdFromGET) {
@@ -112,7 +114,7 @@ export const deployContract = (abi, bin, params) => {
     data: '0x' + bin,
     arguments: params
   }
-
+  deployContractInner(web3Store.web3.eth.accounts, abi, deployOpts)
   return web3Store.web3.eth.getAccounts()
     .then(accounts => deployContractInner(accounts, abi, deployOpts))
 }

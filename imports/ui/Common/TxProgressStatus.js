@@ -11,6 +11,7 @@ export class TxProgressStatus extends Component {
     this.state = {
       showModal: true
     }
+
   }
 
   txStatuses = () => {
@@ -28,7 +29,8 @@ export class TxProgressStatus extends Component {
     const { tierStore, deploymentStore } = this.props
     const tiers = new Array(tierStore.tiers.length).fill(true)
     const tableContent = this.txStatuses()
-
+    console.log(deploymentStore.deploymentHasFinished);
+    console.log(process.env.NODE_ENV);
     return (
       tableContent.length
         ? <div className="flex-table">
@@ -45,9 +47,9 @@ export class TxProgressStatus extends Component {
                     {tiers.map((value, index) => (
                       <div className="sm-text" key={index.toString()}>
                         {tx.status[index] === true
-                          ? <i className="material-icons">check</i>
+                          ? <i className="ms-Icon ms-Icon--CheckMark" />
                           : tx.status[index] === false
-                            ? <i className="material-icons">access_time</i>
+                            ? <i className="ms-Icon ms-Icon--Clear" />
                             : ''
                         }
                       </div>

@@ -91,14 +91,16 @@ class DeploymentStore {
     })
   }
 
+  //something is wrong with the mobx implemented-_-
   @computed
-  get deploymentHasFinished () {    
-    this.txMap.forEach((value, key, map) => {
-      if(value == false) {
-        return false
+  get deploymentHasFinished () {  
+    let flag = true  
+    this.txMap.forEach((value, key, map) => {         
+      if( value.slice()[0]=== false) {        
+        flag = false
       }
     })
-    return true
+    return flag
   }
 
   @computed

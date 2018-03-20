@@ -116,7 +116,8 @@ export const toast = {
       return
     }
 
-    this.msg[ type ](message, options)
+    //this.msg[ type ](message, options)
+    console.log(message);
   }
 }
 

@@ -37,12 +37,10 @@ const ContinueButton = ({downloadStatus}) => {
 export default class CrowdsaleContractStep1 extends Component {
       
   constructor(props) {    
-    super(props)    
-    console.log(this.props.contractStore);
+    super(props)        
     this.state = {
       contractsDownloaded: DOWNLOAD_STATUS.PENDING,
     }
-    
     this.addContractsToState = this.addContractsToState.bind(this);
   }
 

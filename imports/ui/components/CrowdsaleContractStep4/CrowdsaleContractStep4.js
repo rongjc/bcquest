@@ -7,9 +7,10 @@ import {
   handleContractsForFile,
   handlerForFile,
   scrollToBottom,
+  getTokenParams,
   setupContractDeployment
 } from './utils'
-import { noContractDataAlert, successfulDeployment, skippingTransaction } from '../../../utils/alerts'
+import { noContractDataAlert, successfulDeployment, skippingTransaction, saveAlert } from '../../../utils/alerts'
 import {
   CONTRACT_TYPES,
   DESCRIPTION,
@@ -29,6 +30,7 @@ import { isObservableArray } from 'mobx'
 import JSZip from 'jszip'
 import executeSequentially from '../../../utils/executeSequentially'
 import { PreventRefresh } from '../../Common/PreventRefresh'
+import { getEncodedABIClientSide } from '../../../utils/microservices'
 
 const { PUBLISH } = NAVIGATION_STEPS
 
@@ -43,6 +45,7 @@ export default class CrowdSaleStep3 extends Component {
       transactionFailed: false
     }
     this.props.deploymentStore.setDeploymentStep(0)
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   contractDownloadSuccess = options => {
@@ -53,8 +56,10 @@ export default class CrowdSaleStep3 extends Component {
   componentDidMount () {
     scrollToBottom()
     copy('copy')
+    const paramsToken = getTokenParams(this.props.tokenStore);
+    console.log(paramsToken);
     if (!this.props.deploymentStore.hasEnded) {
-      this.showModal()
+      //this.showModal()
     }
 
     if (process.env.NODE_ENV !== 'development') this.deployCrowdsale()
@@ -210,9 +215,8 @@ export default class CrowdSaleStep3 extends Component {
   }
 
   downloadContractButton = () => {
-    this.downloadCrowdsaleInfo();
-    this.contractDownloadSuccess({ offset: 14 })
-  }
+
+  } 
 
   goToCrowdsalePage = () => {
     const { contractStore } = this.props
@@ -235,6 +239,10 @@ export default class CrowdSaleStep3 extends Component {
     this.props.deploymentStore.resetDeploymentStep()
 
     this.props.history.push(newHistory)
+  }
+
+  startDeploy =() =>{
+
   }
 
   render() {
@@ -462,27 +470,12 @@ export default class CrowdSaleStep3 extends Component {
               ? globalLimitsBlock
               : null
             }
-            {tokenBlock}
-            {pricingStrategyBlock}
-            {ABIEncodedOutputsPricingStrategy}
-            {finalizeAgentBlock}
-            {ABIEncodedOutputsFinalizeAgent}
-            <DisplayTextArea
-              label={"Crowdsale Contract Source Code"}
-              value={contractStore ? contractStore.crowdsale ? contractStore.crowdsale.src : "" : ""}
-              description="Crowdsale Contract Source Code"
-            />
-            <DisplayTextArea
-              label={"Crowdsale Contract ABI"}
-              value={contractStore ? contractStore.crowdsale ? JSON.stringify(contractStore.crowdsale.abi) : "" : ""}
-              description="Crowdsale Contract ABI"
-            />
-            {ABIEncodedOutputsCrowdsale}
           </div>
         </div>
         <div className="button-container">
-          <div onClick={this.downloadContractButton} className="button button_fill_secondary">Download File</div>
-          <a onClick={this.goToCrowdsalePage} className="button button_fill">Continue</a>
+          <div onClick={this.downloadContractButton} className="button button_fill_secondary">Save(not implemented)</div>
+          <a onClick={this.goToCrowdsalePage} className="button button_fill">Reset</a>
+          <a onClick={this.showModal} className="button button_fill">Deploy</a>
         </div>
         <ModalContainer
           title={'Tx Status'}

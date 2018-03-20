@@ -12,22 +12,15 @@ import { countDecimalPlaces, floorToDecimals, toFixed } from '../../../utils/uti
 import { CONTRACT_TYPES, DOWNLOAD_NAME, TRUNC_TO_DECIMALS } from '../../../utils/constants'
 import { isObservableArray } from 'mobx'
 import { getEncodedABIClientSide } from '../../../utils/microservices'
-
-import ContractStore from '../../../stores/ContractStore';
-import Web3Store from '../../../stores/Web3Store';
-import TokenStore from '../../../stores/TokenStore';
-import TierStore from '../../../stores/TierStore';
-import ReservedTokenStore from '../../../stores/ReservedTokenStore';
-import DeploymentStore from '../../../stores/DeploymentStore';
-import GeneralStore from '../../../stores/GeneralStore';
-
-const contractStore = new ContractStore
-const web3Store = new Web3Store
-const tokenStore = new TokenStore
-const tierStore = new TierStore
-const reservedTokenStore = new ReservedTokenStore
-const generalStore = new GeneralStore
-
+import {
+  contractStore,
+  web3Store,
+  tokenStore,
+  tierStore,
+  reservedTokenStore,
+  generalStore,
+  deploymentStore
+} from '../../../stores'
 
 export const setupContractDeployment = () => {
   if (!contractStore.safeMathLib) {
@@ -125,7 +118,7 @@ export const deploySafeMathLibrary = () => {
   ]
 }
 
-const getTokenParams = token => {
+export const getTokenParams = token => {
   const whitelistWithGlobalMinCap = tierStore.tiers[0].whitelistEnabled !== 'yes' && tierStore.globalMinCap
   const minCap = whitelistWithGlobalMinCap ? toFixed(tierStore.globalMinCap * 10 ** token.decimals).toString() : 0
 

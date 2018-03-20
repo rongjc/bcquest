@@ -49,9 +49,7 @@ export default class AppContainer extends Component {
         <div className="footer ms-bgColor-themePrimary">
           <Footer />
         </div>
-      </Fabric>
-   
-      
+      </Fabric>      
     );
   }
 }

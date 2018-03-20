@@ -9,21 +9,17 @@ export default class Web3Store {
 
   constructor(strategies) {    
     this.getWeb3((web3) => {
-      if (web3) {
-        this.web3 = web3
-        this.accounts = web3.eth.accounts
-        this.curAddress = web3.eth.accounts[0]            
-        // I can't seem to get the promise working
-        // web3.eth.getAccounts().then((accounts) => {
-        //   this.accounts = accounts
-        //   this.curAddress = accounts[0]
-        // })
+      if (web3) {        
+        web3.eth.getAccounts().then((accounts) => {
+          this.accounts = accounts
+          this.curAddress = accounts[0]
+        })
       }
     })
   }
 
   getWeb3 = cb => {
-    var web3 = window.web3;
+    var web3 = window.web3;    
     if (typeof web3 === 'undefined') {
       // no web3, use fallback
       console.error("Please use a web3 browser");

@@ -17,7 +17,7 @@ SidebarMenu.defaultProps = {
       url: '/crowdsale',
       links: [{
         name: 'New',
-        url: '/crowdsale/new',
+        url: '/crowdsale/new/1',
         icon: 'Add',
       }, {
         name: 'Edit',
