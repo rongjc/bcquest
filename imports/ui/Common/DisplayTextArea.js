@@ -8,7 +8,7 @@ export const DisplayTextArea = props => {
           <p className="label">{props.label}</p>
         </div>
         <div className="copy-area-container">
-          <btn className="copy" data-clipboard-action="copy" data-clipboard-text={props.value} />
+          <button className="copy" data-clipboard-action="copy" data-clipboard-text={props.value} />
         </div>
       </div>
       <pre>{props.value}</pre>

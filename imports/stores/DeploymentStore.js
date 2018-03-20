@@ -46,8 +46,8 @@ class DeploymentStore {
         return this.txMap.set(tx.name, [false])
       }
       this.txMap.set(tx.name, [])
-    })
-
+    })    
+    console.log(this.txMap._data.values().every(e=>console.log(e)));
     this.logTxMap()
   }
 
@@ -94,7 +94,8 @@ class DeploymentStore {
 
   @computed
   get deploymentHasFinished () {
-    return this.txMap.values().every(statuses => statuses.every(status => status))
+    console.log(this.txMap.values());
+    return this.txMap._data.values().every(statuses => statuses.every(status => status))
   }
 
   @computed

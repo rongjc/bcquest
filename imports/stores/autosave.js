@@ -4,17 +4,17 @@ import storage from 'store2'
 export default function autosave(store, storageKey, deserialize = x => x) {
   let firstRun = true
 
-  // mobx.autorun(`autorun for ${storageKey}`, () => {
-  //   if (firstRun) {
-  //     const existingStore = storage.get(storageKey)
+  mobx.autorun(() => {
+    // if (firstRun) {
+    //   const existingStore = storage.get(storageKey)
 
-  //     if (existingStore) {
-  //       mobx.extendObservable(store, deserialize(existingStore))
-  //     }
+    //   if (existingStore) {
+    //     mobx.extendObservable(store, deserialize(existingStore))
+    //   }
 
-  //     firstRun = false
-  //   }
+    //   firstRun = false
+    // }
 
-  //   storage.set(storageKey, mobx.toJS(store))
-  // })
+    storage.set(storageKey, mobx.toJS(store))
+  })
 }
