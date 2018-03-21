@@ -75,7 +75,8 @@ body {
 
 .button_fill {
     background-color: #08b3f2;
-    color: #fff
+    color: #fff;
+    margin-right: 10px
 }
 
 .button_fill:hover {

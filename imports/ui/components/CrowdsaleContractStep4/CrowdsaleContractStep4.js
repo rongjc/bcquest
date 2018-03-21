@@ -84,7 +84,7 @@ export default class CrowdSaleStep3 extends Component {
     const { deploymentStore } = this.props
     const startAt = deploymentStore.deploymentStep ? deploymentStore.deploymentStep : 0
     const deploymentSteps = buildDeploymentSteps()
-
+    console.log
     executeSequentially(deploymentSteps, startAt, (index) => {
       deploymentStore.setDeploymentStep(index)
     })
@@ -474,7 +474,7 @@ export default class CrowdSaleStep3 extends Component {
         </div>
         <div className="button-container">
           <div onClick={this.downloadContractButton} className="button button_fill_secondary">Save(not implemented)</div>
-          <a onClick={this.goToCrowdsalePage} className="button button_fill">Reset</a>
+          <a onClick={this.goToCrowdsalePage} className="button button_fill button_fill_secondary">Reset</a>
           <a onClick={this.showModal} className="button button_fill">Deploy</a>
         </div>
         <ModalContainer
