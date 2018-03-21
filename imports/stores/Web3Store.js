@@ -9,7 +9,8 @@ export default class Web3Store {
 
   constructor(strategies) {    
     this.getWeb3((web3) => {
-      if (web3) {        
+      if (web3) {    
+        this.web3 = web3
         web3.eth.getAccounts().then((accounts) => {
           this.accounts = accounts
           this.curAddress = accounts[0]

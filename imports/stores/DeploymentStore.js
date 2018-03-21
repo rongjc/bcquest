@@ -105,9 +105,9 @@ class DeploymentStore {
 
   @computed
   get nextPendingTransaction () {
-    //for (let [tx, txStatuses] of this.txMap) {
-      // if (txStatuses.some(status => !status)) return tx
-    //}
+    // for (let [tx, txStatuses] of this.txMap) {
+    //   if (txStatuses.some(status => !status)) return tx
+    // }
     
     for (var key in this.txMap) {      
       if (this.txMap.hasOwnProperty(key)) {   

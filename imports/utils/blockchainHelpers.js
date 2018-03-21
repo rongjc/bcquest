@@ -1,8 +1,6 @@
 import { incorrectNetworkAlert, noMetaMaskAlert, invalidNetworkIDAlert } from './alerts'
 import { CHAINS, MAX_GAS_PRICE } from './constants'
-import { crowdsaleStore } from '../stores/CrowdsaleStore'
-import { generalStore } from '../stores/GeneralStore'
-import {web3Store} from '../stores/'
+import { web3Store, generalStore, crowdsaleStore } from '../stores/'
 
 import { fetchFile } from './utils'
 
@@ -28,9 +26,8 @@ console.log(web3Store)
   }
 }
 
-const checkMetaMask = () => {
-  console.log(web3)
-  if(web3.eth.getAccounts.length === 0) return noMetaMaskAlert()    
+const checkMetaMask = () => {  
+  if(web3.eth.getAccounts().length === 0) return noMetaMaskAlert()    
 }
 
 export function checkNetWorkByID (_networkIdFromGET) {
@@ -114,7 +111,7 @@ export const deployContract = (abi, bin, params) => {
     data: '0x' + bin,
     arguments: params
   }
-  deployContractInner(web3Store.web3.eth.accounts, abi, deployOpts)
+  console.log(deployOpts)  
   return web3Store.web3.eth.getAccounts()
     .then(accounts => deployContractInner(accounts, abi, deployOpts))
 }
@@ -126,7 +123,8 @@ const deployContractInner = (accounts, abi, deployOpts) => {
   const objAbi = JSON.parse(JSON.stringify(abi))
   const contractInstance = new web3.eth.Contract(objAbi)
   const deploy = contractInstance.deploy(deployOpts)
-
+    
+  console.log(accounts)
   return deploy.estimateGas({ gas: MAX_GAS_PRICE })
     .then(
       estimatedGas => estimatedGas,
