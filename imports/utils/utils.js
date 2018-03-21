@@ -29,9 +29,7 @@ export const findConstructor = (abi) => {
   let abiConstructor
 
   abi.forEach(abiObj => {
-    if (abiObj.type === "constructor") {
-      console.log(abiObj);
-      console.log(abiObj.inputs);
+    if (abiObj.type === "constructor") {      
       abiConstructor = abiObj.inputs;
     }
   })

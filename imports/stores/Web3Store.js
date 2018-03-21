@@ -3,9 +3,9 @@ import { observable } from 'mobx';
 
 export default class Web3Store {
 
-  @observable web3;
-  @observable curAddress;
-  @observable accounts;
+  @observable web3
+  @observable curAddress
+  @observable accounts
 
   constructor(strategies) {    
     this.getWeb3((web3) => {
@@ -20,23 +20,23 @@ export default class Web3Store {
   }
 
   getWeb3 = cb => {
-    var web3 = window.web3;    
+    var web3 = window.web3    
     if (typeof web3 === 'undefined') {
       // no web3, use fallback
-      console.error("Please use a web3 browser");
-      const devEnvironment = process.env.NODE_ENV === 'development';
+      console.error("Please use a web3 browser")
+      const devEnvironment = process.env.NODE_ENV === 'development'
       if (devEnvironment) {
-        web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+        web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
       }
 
-      cb(web3, false);
+      cb(web3, false)
     } else {
       // window.web3 == web3 most of the time. Don't override the provided,
       // web3, just wrap it in your Web3.
-      var myWeb3 = new Web3(web3.currentProvider);      
-      cb(myWeb3, false);
+      var myWeb3 = new Web3(web3.currentProvider)      
+      cb(myWeb3, false)
     }
-    return myWeb3;
+    return myWeb3
   }
 }
 

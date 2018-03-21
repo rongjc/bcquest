@@ -1,12 +1,12 @@
 import storage from 'store2'
-import ContractStore from './ContractStore';
-import PricingStrategyStore from './PricingStrategyStore';
-import ReservedTokenStore from './ReservedTokenStore';
-import StepThreeValidationStore from './StepThreeValidationStore';
-import StepTwoValidationStore from './StepTwoValidationStore';
-import TierStore from './TierStore';
-import TokenStore from './TokenStore';
-import Web3Store from './Web3Store';
+import ContractStore from './ContractStore'
+import PricingStrategyStore from './PricingStrategyStore'
+import ReservedTokenStore from './ReservedTokenStore'
+import StepThreeValidationStore from './StepThreeValidationStore'
+import StepTwoValidationStore from './StepTwoValidationStore'
+import TierStore from './TierStore'
+import TokenStore from './TokenStore'
+import Web3Store from './Web3Store'
 import TierCrowdsaleListStore from './TierCrowdsaleListStore'
 import CrowdsaleBlockListStore from './CrowdsaleBlockListStore'
 import GeneralStore from './GeneralStore'
@@ -55,4 +55,4 @@ export {
   crowdsaleStore,
   gasPriceStore,
   deploymentStore
-};
+}

@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action, computed } from 'mobx'
 import { VALIDATION_TYPES, defaultTiers } from '../utils/constants'
 import {
   validateName, validateTime, validateSupply, validateRate, validateAddress, validateLaterTime,
@@ -9,13 +9,14 @@ const { VALID, INVALID } = VALIDATION_TYPES
 
 class TierStore {
 
-  @observable tiers;
-  @observable validTiers;
-  @observable globalMinCap = '';
+  @observable tiers
+  @observable validTiers
+  @observable globalMinCap = ''
 
   constructor() {
     this.reset()
     autosave(this, 'TierStore')
+    console.log(this)
   }
 
   @action reset = () => {
@@ -80,8 +81,9 @@ class TierStore {
         break
       case 'startTime':
         if (index > 0) {
+          console.log(this.tiers)
           this.validTiers[index][property] = validateLaterOrEqualTime(this.tiers[index][property], this.tiers[index - 1].endTime) ? VALID : INVALID
-        } else {
+        } else {          
           this.validTiers[index][property] = validateTime(this.tiers[index][property]) ? VALID: INVALID
         }
         break
@@ -197,4 +199,4 @@ class TierStore {
   }
 }
 
-export default TierStore;
+export default TierStore

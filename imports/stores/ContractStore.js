@@ -5,20 +5,20 @@ import autosave from './autosave'
 
 class ContractStore{
 
-  @observable name;
-  @observable token;
-  @observable crowdsale;
-  @observable pricingStrategy;
-  @observable multisig;
-  @observable nullFinalizeAgent;
-  @observable finalizeAgent;
-  @observable tokenTransferProxy;
-  @observable safeMathLib;
-  @observable registry;
-  @observable contractType;
+  @observable name
+  @observable token
+  @observable crowdsale
+  @observable pricingStrategy
+  @observable multisig
+  @observable nullFinalizeAgent
+  @observable finalizeAgent
+  @observable tokenTransferProxy
+  @observable safeMathLib
+  @observable registry
+  @observable contractType
 
   constructor() {
-    this.contractType = CONTRACT_TYPES.whitelistwithcap;    
+    this.contractType = CONTRACT_TYPES.whitelistwithcap    
     autosave(this, 'ContractStore')
   }
 

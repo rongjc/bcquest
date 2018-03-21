@@ -222,11 +222,12 @@ export default class CrowdSaleStep3 extends Component {
     const { contractStore } = this.props
     const isValidContract = contractStore.crowdsale.addr.length
 
+    console.log(contractStore.crowdsale.addr)
     if (!isValidContract) {
       return noContractDataAlert()
     }
 
-    const crowdsalePage = '/crowdsale'
+    const crowdsalePage = '/crowdsale/new/1'
     const url = `${crowdsalePage}?addr=${contractStore.crowdsale.addr[0]}&networkID=${contractStore.crowdsale.networkID}`
 
     if (!this.state.contractDownloaded) {
@@ -473,8 +474,6 @@ export default class CrowdSaleStep3 extends Component {
           </div>
         </div>
         <div className="button-container">
-          <div onClick={this.downloadContractButton} className="button button_fill_secondary">Save(not implemented)</div>
-          <a onClick={this.goToCrowdsalePage} className="button button_fill button_fill_secondary">Reset</a>
           <a onClick={this.showModal} className="button button_fill">Deploy</a>
         </div>
         <ModalContainer
@@ -486,6 +485,7 @@ export default class CrowdSaleStep3 extends Component {
             deployCrowdsale={this.deployCrowdsale}
             onSkip={this.state.transactionFailed ? this.skipTransaction : null}
           />
+          <a onClick={hideModal} className="button button_fill">hide</a>
         </ModalContainer>
         <PreventRefresh/>
       </section>

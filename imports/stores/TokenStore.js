@@ -6,13 +6,13 @@ const { EMPTY, VALID, INVALID } = VALIDATION_TYPES;
 
 class TokenStore {
 
-  @observable name;
-  @observable ticker;
-  @observable supply;
-  @observable decimals;
-  @observable validToken;
-  @observable reservedTokensInput;
-  @observable reservedTokens;
+  @observable name
+  @observable ticker
+  @observable supply
+  @observable decimals
+  @observable validToken
+  @observable reservedTokensInput
+  @observable reservedTokens
 
   constructor() {
     this.reset()

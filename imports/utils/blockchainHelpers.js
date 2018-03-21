@@ -12,7 +12,6 @@ const web3 = web3Store.web3
 
 export function checkWeb3 () { 
 
-console.log(web3Store)
   if (!web3) {
     setTimeout(function () {
       web3Store.getWeb3(web3 => {

@@ -1,13 +1,12 @@
-import { observable, action } from 'mobx';
+import { observable, action } from 'mobx'
 import autosave from './autosave'
 
 class CrowdsaleBlockListStore {
 
-  @observable blockList;
+  @observable blockList
 
   constructor(blockList = []) {
-    this.blockList = blockList;
-
+    this.blockList = blockList
     autosave(this, 'CrowdsaleBlockListStore')
   }
 
@@ -19,7 +18,7 @@ class CrowdsaleBlockListStore {
   @action setCrowdsaleItemProperty = (index, property, value) => {
     let newCrowdsaleItem = {...this.blockList[index]}
     newCrowdsaleItem[property] = value
-    this.blockList[index] = newCrowdsaleItem;
+    this.blockList[index] = newCrowdsaleItem
   }
 
   @action removeCrowdsaleItem = (index) => {
@@ -31,4 +30,4 @@ class CrowdsaleBlockListStore {
   }
 }
 
-export default CrowdsaleBlockListStore;
+export default CrowdsaleBlockListStore
