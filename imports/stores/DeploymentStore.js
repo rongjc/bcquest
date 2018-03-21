@@ -69,6 +69,7 @@ class DeploymentStore {
 
   @action setDeploymentStep = (index) => {
     this.deploymentStep = index
+    console.log(this);
   }
 
   @action resetDeploymentStep = () => {
@@ -111,6 +112,7 @@ class DeploymentStore {
     
     for (var key in this.txMap) {      
       if (this.txMap.hasOwnProperty(key)) {   
+          console.log("next", this.txMap[key])
         if (this.txMap[key].some(status => !status)) return key
       }
     }

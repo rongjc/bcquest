@@ -103,7 +103,7 @@ export const deploySafeMathLibrary = () => {
               .forEach(key => {
                 if (contractStore[key].bin) {
                   const strToReplace = '__:SafeMathLibExt_______________________'
-                  const newBin = window.reaplaceAll(strToReplace, safeMathLibAddr.substr(2), contractStore[key].bin)
+                  const newBin = replaceAll(strToReplace, safeMathLibAddr.substr(2), contractStore[key].bin)
                   contractStore.setContractProperty(key, 'bin', newBin)
                 }
               })
@@ -117,7 +117,9 @@ export const deploySafeMathLibrary = () => {
     }
   ]
 }
-
+export const replaceAll = (search, replacement, target) => {    
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
 export const getTokenParams = token => {
   const whitelistWithGlobalMinCap = tierStore.tiers[0].whitelistEnabled !== 'yes' && tierStore.globalMinCap
   const minCap = whitelistWithGlobalMinCap ? toFixed(tierStore.globalMinCap * 10 ** token.decimals).toString() : 0
@@ -133,6 +135,7 @@ export const getTokenParams = token => {
 }
 
 export const deployToken = () => {
+  console.log("Deploy Token")
   return [
     () => {
       const abiToken = contractStore.token.abi || []
@@ -155,6 +158,7 @@ const getPricingStrategyParams = tier => {
 }
 
 export const deployPricingStrategy = () => {
+  console.log("Deploy Pricing")
   return tierStore.tiers.map((tier, index) => {
     return () => {
       const abiPricingStrategy = contractStore.pricingStrategy.abi || []
@@ -195,6 +199,7 @@ const getCrowdSaleParams = index => {
 }
 
 export const deployCrowdsale = () => {
+  console.log("Deploy crowdsale")
   return tierStore.tiers.map((tier, index) => {
     return () => {
       const { whitelistwithcap } = CONTRACT_TYPES
@@ -213,6 +218,7 @@ export const deployCrowdsale = () => {
 
           const newCrowdsaleAddr = contractStore.crowdsale.addr.concat(crowdsaleAddr)
           contractStore.setContractProperty('crowdsale', 'addr', newCrowdsaleAddr)
+          console.log(contractStore)
         })
         .then(() => deploymentStore.setAsSuccessful('crowdsale'))
     }
@@ -220,6 +226,7 @@ export const deployCrowdsale = () => {
 }
 
 function registerCrowdsaleAddress () {
+  console.log("registerCrowdsaleAddress")
   return [
     () => {
       const { web3 } = web3Store
@@ -227,12 +234,13 @@ function registerCrowdsaleAddress () {
 
       const registryAbi = contractStore.registry.abi
       const crowdsaleAddress = contractStore.crowdsale.addr[0]
+      console.log(crowdsaleAddress);
 
       const whenRegistryAddress = getRegistryAddress()
 
       const whenAccount = web3.eth.getAccounts()
         .then((accounts) => accounts[0])
-
+      console.log(whenRegistryAddress);
       return Promise.all([whenRegistryAddress, whenAccount])
         .then(([registryAddress, account]) => {
           const registry = new web3.eth.Contract(toJS(registryAbi), registryAddress)
@@ -501,6 +509,7 @@ export const updateJoinedCrowdsales = () => {
 }
 
 export const setFinalizeAgent = () => {
+  console.log("setFinalizeAgent")
   return tierStore.tiers.map((tier, index) => {
     return () => {
       const abi = contractStore.crowdsale.abi.slice()
@@ -533,6 +542,7 @@ export const setFinalizeAgent = () => {
 }
 
 export const setReleaseAgent = () => {
+  console.log("setReleaseAgent")
   return tierStore.tiers.map((tier, index) => {
     return () => {
       const abi = contractStore.token.abi.slice()
@@ -565,6 +575,7 @@ export const setReleaseAgent = () => {
 }
 
 export const setReservedTokensListMultiple = () => {
+  console.log("setReservedTokensListMultiple")
   return [() => {
     const abi = contractStore.token.abi.slice()
     const addr = contractStore.token.addr

@@ -36,16 +36,16 @@ const { PUBLISH } = NAVIGATION_STEPS
 
 @inject('contractStore', 'reservedTokenStore', 'tierStore', 'tokenStore', 'web3Store', 'deploymentStore')
 @observer
-export default class CrowdSaleStep3 extends Component {
+export default class CrowdSaleStep4 extends Component {
   constructor (props) {
     super(props)
     this.state = {
       contractDownloaded: false,
       modal: false,
       transactionFailed: false
-    }
-    this.props.deploymentStore.setDeploymentStep(0)
+    }    
     this.componentDidMount = this.componentDidMount.bind(this);
+    console.log(this.props.contractStore.crowdsale.addr)
   }
 
   contractDownloadSuccess = options => {
@@ -83,10 +83,9 @@ export default class CrowdSaleStep3 extends Component {
   resumeContractDeployment = () => {
     const { deploymentStore } = this.props
     const startAt = deploymentStore.deploymentStep ? deploymentStore.deploymentStep : 0
-    const deploymentSteps = buildDeploymentSteps()
-    console.log
+    const deploymentSteps = buildDeploymentSteps()    
     executeSequentially(deploymentSteps, startAt, (index) => {
-      deploymentStore.setDeploymentStep(index)
+      deploymentStore.setDeploymentStep(index)      
     })
       .then(() => {
         this.hideModal()
@@ -238,7 +237,7 @@ export default class CrowdSaleStep3 extends Component {
     const newHistory = isValidContract ? url : crowdsalePage
 
     this.props.deploymentStore.resetDeploymentStep()
-
+    this.props.deploymentStore.clear()
     this.props.history.push(newHistory)
   }
 
@@ -485,7 +484,9 @@ export default class CrowdSaleStep3 extends Component {
             deployCrowdsale={this.deployCrowdsale}
             onSkip={this.state.transactionFailed ? this.skipTransaction : null}
           />
-          <a onClick={hideModal} className="button button_fill">hide</a>
+          
+          <a onClick={this.goToCrowdsalePage} className="button button_fill">reset</a>
+          <a onClick={this.hideModal} className="button button_fill">hide</a>
         </ModalContainer>
         <PreventRefresh/>
       </section>

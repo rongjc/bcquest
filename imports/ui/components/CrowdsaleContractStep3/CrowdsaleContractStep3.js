@@ -46,9 +46,10 @@ export default class CrowdSaleStep3 extends Component {
     const { contractStore, crowdsaleBlockListStore, tierStore, gasPriceStore } = props;
     window.scrollTo(0, 0);    
     if (contractStore.crowdsale.addr.length > 0) {
-      contractStore.setContractProperty("pricingStrategy", "addr", []);
+      contractStore.setContractProperty("pricingStrategy", "addr", [])      
       setExistingContractParams(contractStore.abi, contractStore.addr[0], contractStore.setContractProperty);
     }
+    console.log(contractStore.addr)
     crowdsaleBlockListStore.emptyList();
     tierStore.setTierProperty("Tier 1", "tier", 0);
     tierStore.setTierProperty("off", "updatable", 0);
@@ -214,8 +215,7 @@ export default class CrowdSaleStep3 extends Component {
       gasPriceSelected: id
     })    
     // Don't modify the price when choosing custom
-    if (id !== this.props.gasPriceStore.custom.id) {
-      console.log(this.props.generalStore);
+    if (id !== this.props.gasPriceStore.custom.id) {      
       this.props.generalStore.setGasPrice(price)
     }
   }
