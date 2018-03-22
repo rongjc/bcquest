@@ -3,7 +3,7 @@ import { floorToDecimals, setFlatFileContentToState, toFixed } from '../utils/ut
 import { contractStore, tokenStore, tierStore, web3Store } from './index'
 
 export function getWhiteListWithCapCrowdsaleAssets() {
-  const contractsRoute = './contracts/'
+  const contractsRoute = '/contracts/'
   const crowdsaleFilename = 'CrowdsaleWhiteListWithCap'
   const binAbi = ['bin', 'abi']
 
@@ -12,16 +12,14 @@ export function getWhiteListWithCapCrowdsaleAssets() {
   const pricingFiles = binAbi.map(ext => `${contractsRoute}${crowdsaleFilename}PricingStrategy_flat.${ext}`)
   const finalizeFiles = binAbi.map(ext => `${contractsRoute}FinalizeAgent_flat.${ext}`)
   const nullFiles = binAbi.map(ext => `${contractsRoute}NullFinalizeAgent_flat.${ext}`)
-  const registryFiles = binAbi.map(ext => `${contractsRoute}Registry_flat.${ext}`)
-  console.log(crowdsaleFiles)
+  const registryFiles = binAbi.map(ext => `${contractsRoute}Registry_flat.${ext}`)  
   const states = crowdsaleFiles.concat(tokenFiles, pricingFiles, finalizeFiles, nullFiles, registryFiles)
     .map(setFlatFileContentToState)
 
   return Promise.all(states)
-    .then(state => {
-      console.log(states);
+    .then(state => {      
       contractStore.setContractProperty('crowdsale', 'src', state[0])
-      contractStore.setContractProperty('crowdsale', 'bin', state[1])
+      contractStore.setContractProperty('crowdsale', 'bin', state[1])      
       contractStore.setContractProperty('crowdsale', 'abi', JSON.parse(state[2]))
       contractStore.setContractProperty('token', 'bin', state[3])
       contractStore.setContractProperty('token', 'abi', JSON.parse(state[4]))
