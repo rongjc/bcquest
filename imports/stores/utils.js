@@ -13,12 +13,13 @@ export function getWhiteListWithCapCrowdsaleAssets() {
   const finalizeFiles = binAbi.map(ext => `${contractsRoute}FinalizeAgent_flat.${ext}`)
   const nullFiles = binAbi.map(ext => `${contractsRoute}NullFinalizeAgent_flat.${ext}`)
   const registryFiles = binAbi.map(ext => `${contractsRoute}Registry_flat.${ext}`)
-
+  console.log(crowdsaleFiles)
   const states = crowdsaleFiles.concat(tokenFiles, pricingFiles, finalizeFiles, nullFiles, registryFiles)
     .map(setFlatFileContentToState)
 
   return Promise.all(states)
     .then(state => {
+      console.log(states);
       contractStore.setContractProperty('crowdsale', 'src', state[0])
       contractStore.setContractProperty('crowdsale', 'bin', state[1])
       contractStore.setContractProperty('crowdsale', 'abi', JSON.parse(state[2]))

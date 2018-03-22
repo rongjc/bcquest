@@ -217,6 +217,7 @@ export const deployCrowdsale = () => {
           console.log('***Deploy crowdsale contract***', index, crowdsaleAddr)
 
           const newCrowdsaleAddr = contractStore.crowdsale.addr.concat(crowdsaleAddr)
+          console.log(contractStore)
           contractStore.setContractProperty('crowdsale', 'addr', newCrowdsaleAddr)
           console.log(contractStore)
         })

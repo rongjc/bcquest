@@ -19,6 +19,7 @@ import CrowdsaleContractStep1 from '../../ui/components/CrowdsaleContractStep1/C
 import CrowdsaleContractStep2 from '../../ui/components/CrowdsaleContractStep2/CrowdsaleContractStep2.js'
 import CrowdsaleContractStep3 from '../../ui/components/CrowdsaleContractStep3/CrowdsaleContractStep3.js'
 import CrowdsaleContractStep4 from '../../ui/components/CrowdsaleContractStep4/CrowdsaleContractStep4.js'
+import Manage from '../../ui/components/Manage/index.js'
 
 // read ../../stores/index.js for configuration
 import * as stores from '../../stores'
@@ -36,7 +37,7 @@ export const renderRoutes = () => (
 			<Route path="/logout" component={LogoutPage}/>
 			<Route path="/signup" component={SignupPage}/>	    	
 	      	<Route path="/test" component={TestPage}/>
-	      	<Route path="/features" component={NotFoundPage}/>
+	      	<Route path="/features" component={NotFoundPage}/>	      	
       	   	<Route path="/" >
 	    		<MainContainer>
 	    			<Switch>	    			
@@ -44,6 +45,7 @@ export const renderRoutes = () => (
 	    			<Route path="/crowdsale/new/2" component={CrowdsaleContractStep2}/>
 	    			<Route path="/crowdsale/new/3" component={CrowdsaleContractStep3}/>
 	    			<Route path="/crowdsale/new/4" component={CrowdsaleContractStep4}/>
+	    			<Route path="/crowdsale/manage" component={Manage}/>
 	    			</Switch>
 	    		</MainContainer>
 	    	</Route>

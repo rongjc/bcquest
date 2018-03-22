@@ -22,10 +22,9 @@ const { VALID, INVALID } = VALIDATION_TYPES
 @observer
 export default class CrowdsaleContractStep2 extends Component {
   constructor(props) {
-    super(props)
-
+    super(props)    
     this.state = {
-      decimals: '',
+      decimals: this.props.tokenStore.decimals || '',
       validation: {
         decimals: {
           disabled: false,
@@ -69,8 +68,7 @@ export default class CrowdsaleContractStep2 extends Component {
     })
     newState.decimals = value
 
-    this.setState(newState)
-
+    this.setState(newState)    
     // TODO: store should only be updated when the user hits 'Continue'
     const { tokenStore } = this.props
     tokenStore.setProperty('decimals', value)
