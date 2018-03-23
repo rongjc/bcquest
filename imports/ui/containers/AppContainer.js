@@ -23,15 +23,15 @@ export default class AppContainer extends Component {
     return { isAuthenticated: Meteor.userId() !== null };
   }
   componentWillMount(){    
-    if (!this.state.isAuthenticated) {
-      history.push('/login');
-    }
+    // if (!this.state.isAuthenticated) {
+    //   history.push('/login');
+    // }
   }
 
   componentDidUpdate(prevProps, prevState){
-    if (!this.state.isAuthenticated) {
-      history.push('/login');
-    }
+    // if (!this.state.isAuthenticated) {
+    //   history.push('/login');
+    // }
   }
   logout(e){
     e.preventDefault();
