@@ -508,7 +508,7 @@ export default class Manage extends Component {
         <p className="title">{tokenStore.name} ({tokenStore.ticker}) Settings</p>
         <p className="description">The most important and exciting part of the crowdsale process. Here you can define
           parameters of your crowdsale campaign.</p>
-        <Link to={`/crowdsale/?addr=${crowdsaleAddress}&networkID=${generalStore.networkId}`}
+        <Link to={`/crowdsale/invest?addr=${crowdsaleAddress}&networkID=${generalStore.networkId}`}
               className="crowdsale-page-link"
         >Crowdsale page</Link>
       </div>

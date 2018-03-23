@@ -20,13 +20,9 @@ SidebarMenu.defaultProps = {
         url: '/crowdsale/new/1',
         icon: 'Add',
       }, {
-        name: 'Edit',
-        url: '/crowdsale/edit',
+        name: 'Manage',
+        url: '/crowdsale/list',
         icon: 'Edit',
-      }, {
-        name: 'Complete',
-        url: '/crowdsale/complete',
-        icon: 'Accept',
       }],
       isExpanded: true,
     },{

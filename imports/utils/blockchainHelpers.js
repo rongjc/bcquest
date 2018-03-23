@@ -261,7 +261,7 @@ export function getRegistryAddress () {
 }
 
 function getRegistryAbi () {
-  return fetchFile('./contracts/Registry_flat.abi')
+  return fetchFile('/contracts/Registry_flat.abi')
 }
 
 function getRegistryContract () {

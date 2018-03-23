@@ -483,9 +483,7 @@ export default class CrowdSaleStep4 extends Component {
             txMap={deploymentStore.txMap}
             deployCrowdsale={this.deployCrowdsale}
             onSkip={this.state.transactionFailed ? this.skipTransaction : null}
-          />
-          
-          <a onClick={this.goToCrowdsalePage} className="button button_fill">reset</a>
+          />                   
           <a onClick={this.hideModal} className="button button_fill">hide</a>
         </ModalContainer>
         <PreventRefresh/>

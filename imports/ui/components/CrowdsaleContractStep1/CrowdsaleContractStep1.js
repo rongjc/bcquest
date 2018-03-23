@@ -40,7 +40,7 @@ export default class CrowdsaleContractStep1 extends Component {
     super(props)        
     this.state = {
       contractsDownloaded: DOWNLOAD_STATUS.PENDING,
-    }
+    }    
     this.addContractsToState = this.addContractsToState.bind(this);
   }
 
